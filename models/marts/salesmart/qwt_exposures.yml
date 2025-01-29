@@ -1,0 +1,19 @@
+version: 2
+
+exposures:
+  - name: weekly_qwt_sales_dashboard
+    type: dashboard
+    maturity: high
+    url: "https://www.google.com"
+    description: qwt dashboards provides enterprise sales inof at high level
+
+    depends_on:
+      - ref('dim_customers')
+      - ref('fct_orders')
+      - ref('dim_products')
+
+    owner:
+      name: jhon smith
+      email: jhon@gmail.com
+      
+      
