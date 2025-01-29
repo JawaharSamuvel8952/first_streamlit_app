@@ -1,4 +1,4 @@
-{{ config(materialized = 'view', schema = 'salesmart') }}
+{{ config(materialized = 'view', schema = env_var('DBT_SALESMARTSCHEMA', 'SALESMART')) }}
  
 {% set min_order_date = get_min_orderdate() %}
 {% set max_order_date = get_max_orderdate() %}  
