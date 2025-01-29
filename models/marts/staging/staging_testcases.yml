@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "{{doc('stg_customers_desc')}}"
+    columns:
+      - name: customerid
+        description: "{{doc('customerid_desc')}}"
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_products
+    description: "{{doc('stg_products_desc')}}"
+    columns:
+      - name: productid
+        description: "{{doc('productid_desc')}}"
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_orderdetails
+    description: "{{doc('stg_orderdetails_desc')}}"
+    columns:
+      - name: orderid
+        description: "{{doc('orderid_desc')}}"
+        tests:
+          - relationships:
+              field: orderid
+              to: ref('stg_orders')
+
+  - name: stg_shipments
+    description: shipment status for each order as received by the customer
+    columns:
+      - name: status
+        description: shipement status based on the current shipment details
+        tests:
+          - accepted_values:
+              values: ["shipped", "returned", "ordered", "replaced"]
+              
+  # - name: stg_employee
+  #   description: master data for all the employees of the enterprise 
+  #   columns:
+  #     - name: empid
+  #       description: unique id given to each employee by the organization
+  #       tests:
+  #         - is_even
