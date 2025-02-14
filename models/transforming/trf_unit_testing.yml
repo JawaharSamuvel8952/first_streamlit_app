@@ -1,0 +1,42 @@
+unit_tests:
+  - name: Power_Status_Check_UT
+    description: checking the power status assigned properly or not
+    model: trf_powers
+
+    given:
+      - input: ref('stg_powers')
+        rows:
+          - {id: 1, points: 400}
+          - {id: 2, points: 500}
+          - {id: 3, points: 700}
+          - {id: 4, points: 800}
+          - {id: 5, points: 1000}
+    expect:
+      rows:
+        - {heros_id: 1, status: weak}
+        - {heros_id: 2, status: weak}
+        - {heros_id: 3, status: heavy}
+        - {heros_id: 4, status: heavy}
+        - {heros_id: 5, status: legendary}
+  
+  - name: Heros_Rank_Check_UT
+    description: validating whether heros rank logic working as expected
+    model: trf_powers
+    overrides:
+      macros: 
+        dbt.current_timestamp: "date('2022-01-15')"
+      
+    given:
+      - input: ref('stg_powers')
+        rows:
+          - {id: 1, power_start_date: 2023-01-23}
+          - {id: 2, power_start_date: 2020-06-01}
+    
+    expect:
+      rows:
+        - {heros_id: 1, ranks: rookie}
+        - {heros_id: 2, ranks: captain}
+      
+
+      
+ 
