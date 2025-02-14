@@ -1,0 +1,11 @@
+version: 2
+
+semantic_models:
+  - name: order_details
+    model: ref('fct_orders')
+
+    measures:
+      - name: median_revenue
+        description: the median revenue generated for each order item
+        agg: median
+        expr: unitprice
