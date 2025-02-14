@@ -13,3 +13,4 @@ sources:
       - name: raw_employee
       - name: raw_offices
       - name: raw_suppliers
+      - name: powers
